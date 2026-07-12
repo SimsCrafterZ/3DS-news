@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "date": "2026-12-07",
+    "title": "«The Legend of Zelda: Twilight Princess» is coming to 3DS!",
+    "summary": "The developer Game of Tobi is currently developing it.",
+    "content": "Following the decompilation of the Wii game \"The Legend of Zelda: Twilight Princess\", developer <a href=\"https://www.patreon.com/cw/GameOfTobi\">Game of Tobi</a> is currently developing a native port for the Nintendo 3DS. The project aims to bring the iconic adventure game to Nintendo's handheld console, and the developer has stated that the 3DS has the capabilities to run it.\n<img src=\"https://storage.ghost.io/c/58/fd/58fdc82a-ad84-44e2-ad58-166d1b419bc4/content/images/size/w1600/2026/07/twilight-princess-3ds-gameplay.jpg\" alt=\"Zelda TP 3ds\" style=\"width:100%;max-width:600px;height:auto;\"/>"
+  },
+  {
+    "id": "test-2",
+    "date": "2026-07-05",
+    "title": "Test",
+    "summary": "Test",
+    "content": "Test"
+  },
+  {
+    "id": "test-3",
+    "date": "2026-06-20",
+    "title": "Test",
+    "summary": "Test",
+    "content": "Test"
+  }
+]

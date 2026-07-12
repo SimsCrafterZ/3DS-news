@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>3DS Actu</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    margin:0;
+}
+
+header {
+    background:#0066cc;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.article {
+    background:white;
+    margin:15px;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.article:hover {
+    background:#e6f2ff;
+}
+
+.date {
+    color:#777;
+    font-size:14px;
+}
+
+#page {
+    padding:20px;
+}
+
+a {
+    color:#0066cc;
+}
+
+footer {
+    background:#0066cc;
+    color:white;
+    text-align:center;
+    padding:10px;
+    margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>3DS'news</h1>
+<p>Nintendo 3DS and Homebrew news</p>
+</header>
+
+
+<div id="page">
+<h2>Latest news</h2>
+<div id="news"></div>
+</div>
+
+
+<footer>
+    <p>3DS'news-0.1.0</p>
+    <p>2026-SimsCrafterZ</p>
+</footer>
+
+
+<script>
+
+let articles = [];
+
+fetch("news.json")
+.then(response => response.json())
+.then(data => {
+
+    articles = data;
+
+    articles.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+    });
+
+    let url = new URLSearchParams(window.location.search);
+    let id = url.get("id");
+
+
+    if(id){
+
+        afficherArticle(id);
+
+    } else {
+
+        afficherListe();
+
+    }
+
+});
+
+
+function afficherListe(){
+
+    let zone = document.getElementById("news");
+
+    zone.innerHTML="";
+
+    articles.forEach(article => {
+
+        zone.innerHTML += `
+        <div class="article" onclick="ouvrir('${article.id}')">
+
+            <h3>${article.title}</h3>
+
+            <div class="date">
+            ${article.date}
+            </div>
+
+            <p>
+            ${article.summary}
+            </p>
+
+        </div>
+        `;
+
+    });
+
+}
+
+
+
+function ouvrir(id){
+
+    window.location.href="?id="+id;
+
+}
+
+
+
+function afficherArticle(id){
+
+    let article = articles.find(a => a.id === id);
+
+    if(!article){
+        document.getElementById("page").innerHTML =
+        "<h2>Article not found</h2>";
+        return;
+    }
+
+
+    document.getElementById("page").innerHTML = `
+
+    <a href="index.html"><=Back to news</a>
+
+    <h1>${article.title}</h1>
+
+    <p class="date">${article.date}</p>
+
+    <p>
+    ${article.content}
+    </p>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
