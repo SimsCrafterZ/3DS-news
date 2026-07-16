@@ -58,21 +58,18 @@ footer {
 
 <header>
 <h1>3DS'news</h1>
-<p>All officials and Homebrew Nintendo 3DS news</p>
+<p>All official and Homebrew Nintendo 3DS news</p>
 </header>
-
 
 <div id="page">
 <h2>Latest news</h2>
 <div id="news"></div>
 </div>
 
-
 <footer>
     <p>3DS'news-0.1.0</p>
     <p>2026-SimsCrafterZ</p>
 </footer>
-
 
 <script>
 
@@ -84,32 +81,34 @@ fetch("news.json")
 
     articles = data;
 
+    // Tri des articles (du plus récent au plus ancien)
     articles.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
+
+        function convertir(date) {
+            let [jour, mois, annee] = date.split("-");
+            return new Date(annee, mois - 1, jour);
+        }
+
+        return convertir(b.date) - convertir(a.date);
+
     });
 
     let url = new URLSearchParams(window.location.search);
     let id = url.get("id");
 
-
     if(id){
-
         afficherArticle(id);
-
     } else {
-
         afficherListe();
-
     }
 
 });
-
 
 function afficherListe(){
 
     let zone = document.getElementById("news");
 
-    zone.innerHTML="";
+    zone.innerHTML = "";
 
     articles.forEach(article => {
 
@@ -119,11 +118,11 @@ function afficherListe(){
             <h3>${article.title}</h3>
 
             <div class="date">
-            ${article.date}
+                ${article.date}
             </div>
 
             <p>
-            ${article.summary}
+                ${article.summary}
             </p>
 
         </div>
@@ -133,15 +132,11 @@ function afficherListe(){
 
 }
 
-
-
 function ouvrir(id){
 
-    window.location.href="?id="+id;
+    window.location.href = "?id=" + id;
 
 }
-
-
 
 function afficherArticle(id){
 
@@ -153,10 +148,9 @@ function afficherArticle(id){
         return;
     }
 
-
     document.getElementById("page").innerHTML = `
 
-    <a href="index.html"><=Back to news</a>
+    <a href="index.html">&larr; Back to news</a>
 
     <h1>${article.title}</h1>
 
